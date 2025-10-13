@@ -20,12 +20,62 @@ enum Role {
 }
 
 model User {
+  id               Int      @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  email            String   @unique
+  password         String
+  role             Role     @default(MEMBER)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  createdProjects  Project[] @relation("ProjectCreator")
+  assignedProjects ProjectUser[]
+  tasks            Task[]
+}
+
+model Project {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String
+  dueDate     String
+  creatorId   Int
+  creator     User          @relation("ProjectCreator", fields: [creatorId], references: [id])
+  assignedUsers ProjectUser[]
+  tasks       Task[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model ProjectUser {
   id        Int      @id @default(autoincrement())
-  firstName String
-  lastName  String
-  email     String   @unique
-  password  String
-  role      Role     @default(MEMBER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  userId    Int
+  projectId Int
+  user      User     @relation(fields: [userId], references: [id])
+  project   Project  @relation(fields: [projectId], references: [id])
+  assignedAt DateTime @default(now())
+
+  @@unique([userId, projectId])
+}
+
+model Task {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  startDate   String
+  endDate     String
+  projectId   Int
+  userId      Int
+  statusId    Int
+  project     Project    @relation(fields: [projectId], references: [id])
+  user        User       @relation(fields: [userId], references: [id])
+  status      TaskStatus @relation(fields: [statusId], references: [id])
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model TaskStatus {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  color String
+  tasks Task[]
 }
