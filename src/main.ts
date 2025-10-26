@@ -12,6 +12,10 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('auth', 'Authentication endpoints')
     .addTag('app', 'Application endpoints')
+    .addTag('projects', 'Project management endpoints')
+    .addTag('tasks', 'Task management endpoints')
+    .addTag('task-status', 'Task status endpoints')
+    .addTag('invitations', 'Project invitation endpoints')
     .addBearerAuth(
       {
         type: 'http',
@@ -30,4 +34,4 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+void bootstrap();

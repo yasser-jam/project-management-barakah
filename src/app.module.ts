@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { TaskStatusModule } from './task-status/task-status.module';
 import { ProjectModule } from './project/project.module';
 import { TaskModule } from './task/task.module';
+import { InvitationModule } from './invitation/invitation.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { TaskModule } from './task/task.module';
     TaskStatusModule,
     ProjectModule,
     TaskModule,
+    InvitationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
