@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { SendInvitationDto } from './dto/send-invitation.dto';
-import { InvitationStatus } from '../../generated/prisma';
+import { InvitationStatus } from '@prisma/client';
 
 @Injectable()
 export class InvitationService {

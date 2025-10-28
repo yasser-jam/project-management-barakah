@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Role } from '../../../generated/prisma';
+import { Role } from '@prisma/client';
 
 export class RegisterDto {
   @ApiProperty({
@@ -29,7 +29,7 @@ export class RegisterDto {
   @ApiPropertyOptional({
     description: 'User role - defaults to MEMBER if not provided',
     enum: Role,
-    example: Role.MEMBER,
+    example: 'MEMBER',
   })
   role?: Role;
 }

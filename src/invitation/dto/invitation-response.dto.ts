@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { InvitationStatus } from '../../../generated/prisma';
+import { InvitationStatus } from '@prisma/client';
 
 export class InvitationUserDto {
   @ApiProperty({ example: 1 })
@@ -51,7 +51,7 @@ export class InvitationResponseDto {
   @ApiProperty({
     description: 'Invitation status',
     enum: InvitationStatus,
-    example: InvitationStatus.PENDING,
+    example: 'PENDING',
   })
   status: InvitationStatus;
 
