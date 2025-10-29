@@ -69,6 +69,7 @@ export class AuthController {
     description: 'Invalid input data',
   })
   async login(@Body() loginDto: LoginDto) {
+    console.log('loginDto', loginDto);
     return this.authService.login(loginDto);
   }
 
@@ -93,4 +94,3 @@ export class AuthController {
     return req.user;
   }
 }
-

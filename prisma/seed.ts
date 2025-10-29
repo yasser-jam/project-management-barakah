@@ -246,7 +246,7 @@ async function main() {
   // Create tasks
   console.log('📋 Creating tasks...');
   const tasks = [
-    // E-commerce Platform tasks
+    // E-commerce Platform tasks (creatorId: user1.id)
     {
       name: 'Design User Interface',
       description: 'Create wireframes, mockups, and user experience flow for the e-commerce platform',
@@ -254,6 +254,7 @@ async function main() {
       endDate: '2024-01-25',
       projectId: createdProjects[0].id,
       userId: user1.id,
+      creatorId: createdProjects[0].creatorId,
       statusId: createdStatuses[3].id, // Done
     },
     {
@@ -263,6 +264,7 @@ async function main() {
       endDate: '2024-01-30',
       projectId: createdProjects[0].id,
       userId: user2.id,
+      creatorId: createdProjects[0].creatorId,
       statusId: createdStatuses[1].id, // In Progress
     },
     {
@@ -272,6 +274,7 @@ async function main() {
       endDate: '2024-02-10',
       projectId: createdProjects[0].id,
       userId: user3.id,
+      creatorId: createdProjects[0].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -281,6 +284,7 @@ async function main() {
       endDate: '2024-02-15',
       projectId: createdProjects[0].id,
       userId: user2.id,
+      creatorId: createdProjects[0].creatorId,
       statusId: createdStatuses[2].id, // In Review
     },
     {
@@ -290,6 +294,7 @@ async function main() {
       endDate: '2024-02-25',
       projectId: createdProjects[0].id,
       userId: user4.id,
+      creatorId: createdProjects[0].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -299,10 +304,11 @@ async function main() {
       endDate: '2024-03-05',
       projectId: createdProjects[0].id,
       userId: user3.id,
+      creatorId: createdProjects[0].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     
-    // Mobile Banking App tasks
+    // Mobile Banking App tasks (creatorId: user1.id)
     {
       name: 'Setup React Native Project',
       description: 'Initialize React Native project with navigation, state management, and security libraries',
@@ -310,6 +316,7 @@ async function main() {
       endDate: '2024-02-05',
       projectId: createdProjects[1].id,
       userId: user1.id,
+      creatorId: createdProjects[1].creatorId,
       statusId: createdStatuses[3].id, // Done
     },
     {
@@ -319,6 +326,7 @@ async function main() {
       endDate: '2024-02-20',
       projectId: createdProjects[1].id,
       userId: user3.id,
+      creatorId: createdProjects[1].creatorId,
       statusId: createdStatuses[1].id, // In Progress
     },
     {
@@ -328,6 +336,7 @@ async function main() {
       endDate: '2024-03-05',
       projectId: createdProjects[1].id,
       userId: user1.id,
+      creatorId: createdProjects[1].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -337,10 +346,11 @@ async function main() {
       endDate: '2024-03-20',
       projectId: createdProjects[1].id,
       userId: user5.id,
+      creatorId: createdProjects[1].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     
-    // Database Migration tasks
+    // Database Migration tasks (creatorId: user2.id)
     {
       name: 'Analyze Current Schema',
       description: 'Document existing MySQL database structure and identify migration requirements',
@@ -348,6 +358,7 @@ async function main() {
       endDate: '2024-01-20',
       projectId: createdProjects[2].id,
       userId: user2.id,
+      creatorId: createdProjects[2].creatorId,
       statusId: createdStatuses[3].id, // Done
     },
     {
@@ -357,6 +368,7 @@ async function main() {
       endDate: '2024-02-10',
       projectId: createdProjects[2].id,
       userId: user5.id,
+      creatorId: createdProjects[2].creatorId,
       statusId: createdStatuses[1].id, // In Progress
     },
     {
@@ -366,10 +378,11 @@ async function main() {
       endDate: '2024-02-25',
       projectId: createdProjects[2].id,
       userId: user6.id,
+      creatorId: createdProjects[2].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     
-    // API Documentation Portal tasks
+    // API Documentation Portal tasks (creatorId: user2.id)
     {
       name: 'Setup Swagger Configuration',
       description: 'Configure Swagger/OpenAPI with authentication and interactive documentation',
@@ -377,6 +390,7 @@ async function main() {
       endDate: '2024-02-05',
       projectId: createdProjects[3].id,
       userId: user2.id,
+      creatorId: createdProjects[3].creatorId,
       statusId: createdStatuses[3].id, // Done
     },
     {
@@ -386,6 +400,7 @@ async function main() {
       endDate: '2024-02-15',
       projectId: createdProjects[3].id,
       userId: user4.id,
+      creatorId: createdProjects[3].creatorId,
       statusId: createdStatuses[2].id, // In Review
     },
     {
@@ -395,10 +410,11 @@ async function main() {
       endDate: '2024-03-01',
       projectId: createdProjects[3].id,
       userId: user2.id,
+      creatorId: createdProjects[3].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     
-    // AI Chatbot Integration tasks
+    // AI Chatbot Integration tasks (creatorId: user3.id)
     {
       name: 'Setup AI Service Integration',
       description: 'Integrate OpenAI API for natural language processing and conversation management',
@@ -406,6 +422,7 @@ async function main() {
       endDate: '2024-03-10',
       projectId: createdProjects[4].id,
       userId: user3.id,
+      creatorId: createdProjects[4].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -415,6 +432,7 @@ async function main() {
       endDate: '2024-03-25',
       projectId: createdProjects[4].id,
       userId: user4.id,
+      creatorId: createdProjects[4].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -424,10 +442,11 @@ async function main() {
       endDate: '2024-04-10',
       projectId: createdProjects[4].id,
       userId: user6.id,
+      creatorId: createdProjects[4].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     
-    // Analytics Dashboard tasks
+    // Analytics Dashboard tasks (creatorId: user4.id)
     {
       name: 'Setup Data Visualization Framework',
       description: 'Configure D3.js and Chart.js for interactive data visualization components',
@@ -435,6 +454,7 @@ async function main() {
       endDate: '2024-03-10',
       projectId: createdProjects[5].id,
       userId: user4.id,
+      creatorId: createdProjects[5].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -444,6 +464,7 @@ async function main() {
       endDate: '2024-03-30',
       projectId: createdProjects[5].id,
       userId: user6.id,
+      creatorId: createdProjects[5].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -453,10 +474,11 @@ async function main() {
       endDate: '2024-04-15',
       projectId: createdProjects[5].id,
       userId: user4.id,
+      creatorId: createdProjects[5].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     
-    // DevOps Pipeline tasks
+    // DevOps Pipeline tasks (creatorId: user5.id)
     {
       name: 'Setup CI/CD Pipeline',
       description: 'Configure GitHub Actions for automated testing, building, and deployment',
@@ -464,6 +486,7 @@ async function main() {
       endDate: '2024-02-25',
       projectId: createdProjects[6].id,
       userId: user5.id,
+      creatorId: createdProjects[6].creatorId,
       statusId: createdStatuses[1].id, // In Progress
     },
     {
@@ -473,6 +496,7 @@ async function main() {
       endDate: '2024-03-15',
       projectId: createdProjects[6].id,
       userId: user6.id,
+      creatorId: createdProjects[6].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -482,10 +506,11 @@ async function main() {
       endDate: '2024-03-25',
       projectId: createdProjects[6].id,
       userId: user5.id,
+      creatorId: createdProjects[6].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     
-    // Security Audit System tasks
+    // Security Audit System tasks (creatorId: user6.id)
     {
       name: 'Vulnerability Scanner Integration',
       description: 'Integrate OWASP ZAP and other security scanning tools for automated vulnerability detection',
@@ -493,6 +518,7 @@ async function main() {
       endDate: '2024-04-15',
       projectId: createdProjects[7].id,
       userId: user6.id,
+      creatorId: createdProjects[7].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -502,6 +528,7 @@ async function main() {
       endDate: '2024-05-10',
       projectId: createdProjects[7].id,
       userId: user5.id,
+      creatorId: createdProjects[7].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -511,10 +538,11 @@ async function main() {
       endDate: '2024-06-10',
       projectId: createdProjects[7].id,
       userId: user6.id,
+      creatorId: createdProjects[7].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     
-    // Customer Support Portal tasks
+    // Customer Support Portal tasks (creatorId: user7.id)
     {
       name: 'Design Support Interface',
       description: 'Create user-friendly interface for ticket submission and tracking',
@@ -522,6 +550,7 @@ async function main() {
       endDate: '2024-03-10',
       projectId: createdProjects[8].id,
       userId: user7.id,
+      creatorId: createdProjects[8].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -531,6 +560,7 @@ async function main() {
       endDate: '2024-03-30',
       projectId: createdProjects[8].id,
       userId: user8.id,
+      creatorId: createdProjects[8].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -540,10 +570,11 @@ async function main() {
       endDate: '2024-04-20',
       projectId: createdProjects[8].id,
       userId: user7.id,
+      creatorId: createdProjects[8].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     
-    // Mobile Game Development tasks
+    // Mobile Game Development tasks (creatorId: user8.id)
     {
       name: 'Game Design Document',
       description: 'Create comprehensive game design document with mechanics and story',
@@ -551,6 +582,7 @@ async function main() {
       endDate: '2024-04-15',
       projectId: createdProjects[9].id,
       userId: user8.id,
+      creatorId: createdProjects[9].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -560,6 +592,7 @@ async function main() {
       endDate: '2024-04-30',
       projectId: createdProjects[9].id,
       userId: user1.id,
+      creatorId: createdProjects[9].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
     {
@@ -569,6 +602,7 @@ async function main() {
       endDate: '2024-05-20',
       projectId: createdProjects[9].id,
       userId: user3.id,
+      creatorId: createdProjects[9].creatorId,
       statusId: createdStatuses[0].id, // To Do
     },
   ];

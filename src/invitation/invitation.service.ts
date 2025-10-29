@@ -14,12 +14,7 @@ export class InvitationService {
   constructor(private prisma: PrismaService) {}
 
   async sendInvitation(sendInvitationDto: SendInvitationDto, senderId: number) {
-    const { receiverId, projectId } = sendInvitationDto;
-
-    // Verify sender and receiver are different
-    if (senderId === receiverId) {
-      throw new BadRequestException('You cannot invite yourself');
-    }
+    const { receiverEmail, projectId } = sendInvitationDto;
 
     // Verify project exists
     const project = await this.prisma.project.findUnique({
@@ -30,14 +25,30 @@ export class InvitationService {
       throw new NotFoundException(`Project with ID ${projectId} not found`);
     }
 
-    // Verify receiver exists
+    // Get sender to check email
+    const sender = await this.prisma.user.findUnique({
+      where: { id: senderId },
+    });
+
+    if (!sender) {
+      throw new NotFoundException(`Sender with ID ${senderId} not found`);
+    }
+
+    // Verify sender and receiver are different
+    if (sender.email === receiverEmail) {
+      throw new BadRequestException('You cannot invite yourself');
+    }
+
+    // Verify receiver exists by email
     const receiver = await this.prisma.user.findUnique({
-      where: { id: receiverId },
+      where: { email: receiverEmail },
     });
 
     if (!receiver) {
-      throw new NotFoundException(`User with ID ${receiverId} not found`);
+      throw new NotFoundException(`User with email ${receiverEmail} not found`);
     }
+
+    const receiverId = receiver.id;
 
     // Check if receiver is already assigned to the project
     const existingAssignment = await this.prisma.projectUser.findFirst({

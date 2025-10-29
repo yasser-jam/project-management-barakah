@@ -11,7 +11,7 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 export class TaskService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createTaskDto: CreateTaskDto) {
+  async create(createTaskDto: CreateTaskDto, creatorId: number) {
     const { name, description, startDate, endDate, projectId, userId, statusId } =
       createTaskDto;
 
@@ -59,7 +59,7 @@ export class TaskService {
       throw new NotFoundException(`Task status with ID ${statusId} not found`);
     }
 
-    return this.prisma.task.create({
+    const task = await this.prisma.task.create({
       data: {
         name,
         description,
@@ -67,6 +67,7 @@ export class TaskService {
         endDate,
         projectId,
         userId,
+        creatorId,
         statusId,
       },
       include: {
@@ -84,9 +85,31 @@ export class TaskService {
             email: true,
           },
         },
+        creator: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
         status: true,
       },
     });
+
+    return {
+      ...task,
+      user: {
+        id: task.user.id,
+        name: `${task.user.firstName} ${task.user.lastName}`,
+        email: task.user.email,
+      },
+      creator: {
+        id: task.creator.id,
+        name: `${task.creator.firstName} ${task.creator.lastName}`,
+        email: task.creator.email,
+      },
+    };
   }
 
   async findAll() {
@@ -106,6 +129,14 @@ export class TaskService {
             email: true,
           },
         },
+        creator: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
         status: true,
       },
       orderBy: { createdAt: 'desc' },
@@ -117,6 +148,11 @@ export class TaskService {
         id: task.user.id,
         name: `${task.user.firstName} ${task.user.lastName}`,
         email: task.user.email,
+      },
+      creator: {
+        id: task.creator.id,
+        name: `${task.creator.firstName} ${task.creator.lastName}`,
+        email: task.creator.email,
       },
     }));
   }
@@ -139,6 +175,14 @@ export class TaskService {
             email: true,
           },
         },
+        creator: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
         status: true,
       },
     });
@@ -153,6 +197,11 @@ export class TaskService {
         id: task.user.id,
         name: `${task.user.firstName} ${task.user.lastName}`,
         email: task.user.email,
+      },
+      creator: {
+        id: task.creator.id,
+        name: `${task.creator.firstName} ${task.creator.lastName}`,
+        email: task.creator.email,
       },
     };
   }
@@ -184,6 +233,14 @@ export class TaskService {
             email: true,
           },
         },
+        creator: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
         status: true,
       },
       orderBy: { createdAt: 'desc' },
@@ -196,15 +253,20 @@ export class TaskService {
         name: `${task.user.firstName} ${task.user.lastName}`,
         email: task.user.email,
       },
+      creator: {
+        id: task.creator.id,
+        name: `${task.creator.firstName} ${task.creator.lastName}`,
+        email: task.creator.email,
+      },
     }));
   }
 
   async update(id: number, updateTaskDto: UpdateTaskDto) {
-    const task = await this.prisma.task.findUnique({
+    const existingTask = await this.prisma.task.findUnique({
       where: { id },
     });
 
-    if (!task) {
+    if (!existingTask) {
       throw new NotFoundException(`Task with ID ${id} not found`);
     }
 
@@ -212,13 +274,13 @@ export class TaskService {
     if (updateTaskDto.userId) {
       const isUserAssigned = await this.prisma.projectUser.findFirst({
         where: {
-          projectId: task.projectId,
+          projectId: existingTask.projectId,
           userId: updateTaskDto.userId,
         },
       });
 
       const project = await this.prisma.project.findUnique({
-        where: { id: task.projectId },
+        where: { id: existingTask.projectId },
       });
 
       if (!isUserAssigned && project?.creatorId !== updateTaskDto.userId) {
@@ -241,7 +303,7 @@ export class TaskService {
       }
     }
 
-    return this.prisma.task.update({
+    const task = await this.prisma.task.update({
       where: { id },
       data: updateTaskDto,
       include: {
@@ -259,9 +321,31 @@ export class TaskService {
             email: true,
           },
         },
+        creator: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+          },
+        },
         status: true,
       },
     });
+
+    return {
+      ...task,
+      user: {
+        id: task.user.id,
+        name: `${task.user.firstName} ${task.user.lastName}`,
+        email: task.user.email,
+      },
+      creator: {
+        id: task.creator.id,
+        name: `${task.creator.firstName} ${task.creator.lastName}`,
+        email: task.creator.email,
+      },
+    };
   }
 
   async remove(id: number) {

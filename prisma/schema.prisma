@@ -36,6 +36,7 @@ model User {
   createdProjects  Project[] @relation("ProjectCreator")
   assignedProjects ProjectUser[]
   tasks            Task[]
+  createdTasks     Task[] @relation("TaskCreator")
   sentInvitations     Invitation[] @relation("InvitationSender")
   receivedInvitations Invitation[] @relation("InvitationReceiver")
 }
@@ -73,9 +74,11 @@ model Task {
   endDate     String
   projectId   Int
   userId      Int
+  creatorId   Int
   statusId    Int
   project     Project    @relation(fields: [projectId], references: [id])
   user        User       @relation(fields: [userId], references: [id])
+  creator     User       @relation("TaskCreator", fields: [creatorId], references: [id])
   status      TaskStatus @relation(fields: [statusId], references: [id])
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt

@@ -74,6 +74,12 @@ export class TaskResponseDto {
   userId: number;
 
   @ApiProperty({
+    description: 'Creator ID (user who created the task)',
+    example: 1,
+  })
+  creatorId: number;
+
+  @ApiProperty({
     description: 'Status ID',
     example: 1,
   })
@@ -92,6 +98,13 @@ export class TaskResponseDto {
     required: false,
   })
   user?: TaskUserDto;
+
+  @ApiProperty({
+    description: 'Task creator information',
+    type: TaskUserDto,
+    required: false,
+  })
+  creator?: TaskUserDto;
 
   @ApiProperty({
     description: 'Task status information',

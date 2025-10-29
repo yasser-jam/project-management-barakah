@@ -15,6 +15,7 @@ import {
   ApiResponse,
   ApiBearerAuth,
   ApiParam,
+  ApiBody,
 } from '@nestjs/swagger';
 import { InvitationService } from './invitation.service';
 import { SendInvitationDto } from './dto/send-invitation.dto';
@@ -32,7 +33,21 @@ export class InvitationController {
   @ApiOperation({
     summary: 'Send a project invitation',
     description:
-      'Sends an invitation to a user to join a project. The sender is automatically set from the JWT token.',
+      'Sends an invitation to a user to join a project by their email address. The sender is automatically set from the JWT token. Use receiverEmail (not receiverId) to specify the user to invite.',
+  })
+  @ApiBody({
+    type: SendInvitationDto,
+    description: 'Invitation details',
+    examples: {
+      example1: {
+        value: {
+          receiverEmail: 'jane.smith@company.com',
+          projectId: 1,
+        },
+        summary: 'Example invitation request',
+        description: 'Send invitation to user by email',
+      },
+    },
   })
   @ApiResponse({
     status: 201,
@@ -41,7 +56,7 @@ export class InvitationController {
   })
   @ApiResponse({
     status: 404,
-    description: 'Project or User not found',
+    description: 'Project not found or User with the provided email not found',
   })
   @ApiResponse({
     status: 400,

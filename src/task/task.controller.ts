@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   ParseIntPipe,
+  Request,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -52,8 +53,8 @@ export class TaskController {
     status: 401,
     description: 'Unauthorized',
   })
-  create(@Body() createTaskDto: CreateTaskDto) {
-    return this.taskService.create(createTaskDto);
+  create(@Body() createTaskDto: CreateTaskDto, @Request() req: any) {
+    return this.taskService.create(createTaskDto, req.user.userId);
   }
 
   @Get()
