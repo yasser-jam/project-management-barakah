@@ -53,11 +53,6 @@ async function bootstrap() {
     swaggerOptions: {
       persistAuthorization: true,
     },
-    customJs: [
-      'https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js',
-      'https://unpkg.com/swagger-ui-dist/swagger-ui-standalone-preset.js',
-    ],
-    customCssUrl: 'https://unpkg.com/swagger-ui-dist/swagger-ui.css',
     customSiteTitle: 'Projy Project Management System API Docs',
   });
 
