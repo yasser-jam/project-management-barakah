@@ -71,7 +71,7 @@ export class ProjectController {
   @Get(':id')
   @ApiOperation({
     summary: 'Get a project by ID',
-    description: 'Retrieves a specific project with all its details',
+    description: 'Retrieves a specific project with all its details, including the user\'s role (CREATOR or MEMBER)',
   })
   @ApiParam({
     name: 'id',
@@ -91,8 +91,8 @@ export class ProjectController {
     status: 401,
     description: 'Unauthorized',
   })
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.projectService.findOne(id);
+  findOne(@Param('id', ParseIntPipe) id: number, @Request() req: any) {
+    return this.projectService.findOne(id, req.user.userId);
   }
 
   @Patch(':id')

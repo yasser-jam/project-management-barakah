@@ -77,7 +77,7 @@ export class ProjectService {
     }));
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, userId: number) {
     const project = await this.prisma.project.findUnique({
       where: { id },
       include: {
@@ -108,8 +108,12 @@ export class ProjectService {
       throw new NotFoundException(`Project with ID ${id} not found`);
     }
 
+    // Determine role based on whether user is the creator
+    const role = project.creatorId === userId ? 'CREATOR' : 'MEMBER';
+
     return {
       ...project,
+      role,
       creator: {
         id: project.creator.id,
         name: `${project.creator.firstName} ${project.creator.lastName}`,
@@ -224,7 +228,7 @@ export class ProjectService {
       },
     });
 
-    return this.findOne(projectId);
+    return this.findOne(projectId, requestUserId);
   }
 
   async unassignUser(
@@ -264,7 +268,7 @@ export class ProjectService {
       },
     });
 
-    return this.findOne(projectId);
+    return this.findOne(projectId, requestUserId);
   }
 }
 

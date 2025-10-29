@@ -54,6 +54,13 @@ export class ProjectResponseDto {
   creatorId: number;
 
   @ApiProperty({
+    description: 'User role in the project (CREATOR if user is the creator, MEMBER otherwise)',
+    example: 'CREATOR',
+    enum: ['CREATOR', 'MEMBER'],
+  })
+  role?: string;
+
+  @ApiProperty({
     description: 'Project creator information',
     type: ProjectCreatorDto,
   })
