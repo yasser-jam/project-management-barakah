@@ -7,6 +7,7 @@ import { TaskStatusModule } from './task-status/task-status.module';
 import { ProjectModule } from './project/project.module';
 import { TaskModule } from './task/task.module';
 import { InvitationModule } from './invitation/invitation.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { InvitationModule } from './invitation/invitation.module';
     ProjectModule,
     TaskModule,
     InvitationModule,
+    StatisticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
